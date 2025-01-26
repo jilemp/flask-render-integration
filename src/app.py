@@ -1,8 +1,12 @@
 from flask import Flask, request, render_template
 from pickle import load
+from joblib import load
+import os
 
 app = Flask(__name__)
-model = load(open("/workspaces/flask-render-integration/models/decision_tree_classifier_default_42.sav", "rb"))
+model_path = os.path.join(os.path.dirname(__file__), "../models/decision_tree_classifier_default_42.sav")
+model = load(open(model_path, "rb"))
+#model = load(open("/workspaces/flask-render-integration/models/decision_tree_classifier_default_42.sav", "rb"))
 class_dict = {
     "0": "Iris setosa",
     "1": "Iris versicolor",
